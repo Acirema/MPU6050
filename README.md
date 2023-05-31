@@ -1,21 +1,17 @@
-| Supported Targets | ESP32 | ESP32-C3 | ESP32-C6 | ESP32-H2 | ESP32-S2 | ESP32-S3 |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | -------- |
-
-# I2C Simple Example
-
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+# I2C MPU6050 ESP-IDF Example 
 
 ## Overview
 
-This example demonstrates basic usage of I2C driver by reading and writing from a I2C connected sensor:
+This example is based onthe I2C_simple example from the examples/peripherals/i2c folder on ESP_IDF. It shows the accelerometer and gyroscope outputs on each axys(x,y,z).
 
-If you have a new I2C application to go (for example, read the temperature data from external sensor with I2C interface), try this as a basic template, then add your own code.
+The next version will be able to calibrate and specify the output precision.
 
+***This documentation is also based on the i2c_simple example from ESP_IDF***
 ## How to use example
 
 ### Hardware Required
 
-To run this example, you should have one ESP32, ESP32-S, ESP32-C or ESP32-H based development board as well as a MPU9250. MPU9250 is a inertial measurement unit, which contains a accelerometer, gyroscope as well as a magnetometer, for more information about it, you can read the [datasheet of the MPU9250 sensor](https://invensense.tdk.com/wp-content/uploads/2015/02/PS-MPU-9250A-01-v1.1.pdf).
+To run this example, you need a ESP32, a MPU6050 and jumpers for connection.The MPU6050 contains an accelerometer, gyroscope and can only use I2C for communication.
 
 #### Pin Assignment:
 
@@ -24,10 +20,10 @@ To run this example, you should have one ESP32, ESP32-S, ESP32-C or ESP32-H base
 |                  | SDA             | SCL           |
 | ---------------- | -------------- | -------------- |
 | ESP I2C Master   | I2C_MASTER_SDA | I2C_MASTER_SCL |
-| MPU9250 Sensor   | SDA            | SCL            |
+| MPU9250 Sensor   | 21             | 22            |
 
 
-For the actual default value of `I2C_MASTER_SDA` and `I2C_MASTER_SCL` see `Example Configuration` in `menuconfig`.
+The pins are directly defined in the code but this values can be replaced by Ì2C_MASTER_SDA and I2C_MASTER_SCL`  in order to use the PINS defined in Example configuration in **idf.py menuconfig**
 
 **Note:** There's no need to add an external pull-up resistors for SDA/SCL pin, because the driver will enable the internal pull-up resistors.
 
@@ -42,12 +38,11 @@ See the [Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/l
 ## Example Output
 
 ```bash
-I (328) i2c-simple-example: I2C initialized successfully
-I (338) i2c-simple-example: WHO_AM_I = 71
+I (328) MPU6050: I2C initialized successfully
+I (338) MPU6050: QUIEN_SOY = 68
+I (338) MPU6050: ACCE X=0.0 Y=0.0 Z=0.0
+I (338) MPU6050: GYRO X=0..0 Y=0.0 Z=0.0
+
+
 I (338) i2c-simple-example: I2C de-initialized successfully
 ```
-
-## Troubleshooting
-
-(For any technical queries, please open an [issue](https://github.com/espressif/esp-idf/issues) on GitHub. We will get back to you as soon as possible.)
-# MPU6050
